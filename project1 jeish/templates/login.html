@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+
+    <style>
+        .input-group-prepend {
+            width: 100%;
+            padding-left: 10px;
+            font-size: medium;
+        }
+
+        .registrationForm label {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: large;
+            padding-top: 0;
+            padding-left: 8px;
+        }
+
+        #pop {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="/index">Book Reviews</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Sign Up<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+    </nav>
+</header>
+
+<body>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for msg in messages %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" id="pop">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>{{msg}}</strong>
+    </div>
+
+    <script>
+        $(".alert").alert();
+    </script>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+
+        <div class="row justify-content-center" style="margin-top: 15%;">
+
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                <legend style="text-align: center;">Login</legend>
+
+                <form action="/authenticate" class="registrationForm" method="POST">
+
+                    <label for="email">Email Address</label><br>
+
+                    <div class="input-group mb-3">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-envelope"
+                                    aria-hidden="true"></i></span>
+                            <input type="email" class="form-control" name="emailID" placeholder="Email" maxlength="50"
+                                required><br>
+                        </div>
+
+                    </div>
+
+                    <label for="pwd">Password</label><br>
+
+                    <div class="input-group mb-3">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-key"
+                                    aria-hidden="true"></i></i></span>
+                            <input type="password" name="pwd" placeholder="Password" class="form-control"
+                                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,16}$"
+                                title="Password length should be in between 8 and 16 and it should include atleast one lowercase letter, one upper case letter, one digit and a special character"
+                                required><br>
+                        </div>
+
+                    </div>
+
+                    <div class="form-check" style="margin-left: 8px;">
+                        <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                        <label class="form-check-label" for="dropdownCheck"> Remember me </label>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-primary"
+                            style="width: 150px; margin-top: 15px;">Login</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
